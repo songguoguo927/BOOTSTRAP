@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图标-alert</title>
+	<link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.css">
+    <script src="../../JQuery-code/js/jquery-3.4.1.min.js"></script>
+	<script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<style>
+		body{
+			overflow-x: hidden;
+		}
+		.info-div{
+			width: 200px;
+			height: 150px;
+			position: absolute;
+			top:10px;
+			right: -210px;
+			opacity: 0;
+			/*display: none;*/
+		}
+	</style>
+	<script>
+		$(function(){
+			// 点击删除按钮后，弹出框显示，并且3秒之后消失
+			$('#del-btn').click(function(){
+				console.log($('.info-div'));
+				$('.info-div').animate({
+					right:'10px',
+					opacity:1
+				});
+				// 2秒之后消失，消失的时间持续了1秒
+				setTimeout(function(){
+					$('.info-div').fadeOut(1000,function(){
+						$('.info-div').css({
+							right:'-210px',
+							opacity:0,
+							display:'block'
+						});
+					});
+				},2000);
+				// $('.info-div').fadeIn(1000);
+				// $('.info-div').removeClass('hidden');
+			});
+			$('#close-btn').click(function(){
+				$('.info-div').fadeOut(1000,function(){
+					$('.info-div').css({
+						right:'-210px',
+						opacity:0,
+						display:'block'
+					});
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="well">
+			<!-- 图标按钮 -->
+			<button class="btn btn-primary">
+				<span class="glyphicon glyphicon-download">
+				</span>
+				下载
+			</button>
+			<button class="btn btn-success" id="del-btn">删除</button>
+			<!-- alert组件 -->
+			<div class="alert alert-danger alert-dismissable">
+				<button data-dismiss="alert" class="close">&times;</button>
+				<div>hello</div>
+			</div>
+		</div>
+	</div>
+	<!-- 右上角的提示框 -->
+	<div class="info-div">
+		<div class="alert alert-success alert-dismissable">
+			<!-- <button class="close"  data-dismiss="alert">&times;</button> -->
+			<button class="close" id="close-btn">&times;</button>
+			<div>删除成功</div>
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
+</html>

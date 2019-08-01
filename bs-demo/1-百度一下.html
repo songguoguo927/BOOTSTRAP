@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css" />
+    <style>
+      .borderRadius-unset {
+        border-radius: unset;
+      }
+      .form-inline .form-group{
+        width: 80%;
+      }
+      .form-inline .form-control{
+        width:100%
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="well">
+        <form action="" class="form-inline">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control borderRadius-unset" />
+            <span
+              class="glyphicon glyphicon-search form-control-feedback"
+            ></span>
+          </div><button class="btn btn-primary borderRadius-unset" type="button">
+            百度一下
+          </button>
+          <!-- 或者给form-group的div加个pull-left类也行 -->
+        </form>
+
+        <br />
+        <form action="">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="basic-addon2"
+            />
+            <span class="input-group-addon" id="basic-addon2">百度一下</span>
+          </div>
+        </form>
+        <!-- 图标按钮 -->
+        <br />
+        <button type="button" class="btn btn-primary">
+          <span class="glyphicon glyphicon-download"></span>
+          下载
+        </button>
+
+        <br />
+        <!-- alert -->
+        <!-- data-dismiss 带有js效果 -->
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Warning!</strong> Better check yourself, you're not looking
+          too good.
+        </div>
+      </div>
+    </div>
+    <script src="../../JQuery-code/js/jquery-3.4.1.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>

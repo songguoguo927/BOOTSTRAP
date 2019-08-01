@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉列表</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css" />
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="../../JQuery-code/js/jquery-3.4.1.min.js"></script>
+	<script src="../bootstrap-3.3.7/js/bootstrap.js"></script>
+	<script>
+		$(function(){
+			// 在li点击之后，将li内部的文本填充到button中
+			$('.dropdown li').click(function(){
+				// console.log($(this).text());
+				$('.dropdown button').html($(this).text()+' <span class="caret"></span>');
+			});
+		});
+
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="well">
+			<div class="dropdown">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			    Dropdown
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li><a href="#">Action</a></li>
+			    <li><a href="#">Another action</a></li>
+			    <li><a href="#">Something else here</a></li>
+			    <li role="separator" class="divider"></li>
+			    <li><a href="#">Separated link</a></li>
+			  </ul>
+			</div>
+		</div>
+		<!-- 按钮组 -->
+		<div class="btn-group" role="group">
+		  <button type="button" class="btn btn-default">Left</button>
+		  <button type="button" class="btn btn-default">Middle</button>
+		  <button type="button" class="btn btn-default">Right</button>
+		</div>
+		<!-- 占满一行的按钮组 -->
+		<div class="btn-group btn-group-justified"> 
+			<a href="" class="btn btn-default">按钮</a>
+			<a href="" class="btn btn-default">按钮</a>
+			<a href="" class="btn btn-default">按钮</a>
+		</div>
+		<div class="btn-group btn-group-justified"> 
+			<div class="btn-group">
+				<button class="btn btn-default">按钮</button>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-default">按钮</button>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-default">按钮</button>
+			</div>
+		</div>
+		<!-- 分页 -->
+		<ul class="pagination">
+	    <li class="disabled">
+	      <a href="#">
+	        <span>&laquo;</span>
+	      </a>
+	    </li>
+	    <li class="active"><a href="#">1</a></li>
+	    <li><a href="#">2</a></li>
+	    <li><a href="#">3</a></li>
+	    <li><a href="#">4</a></li>
+	    <li><a href="#">5</a></li>
+	    <li>
+	      <a href="#">
+	        <span>&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	  <br>
+	  <!-- 徽章 -->
+	  <button class="btn btn-danger">
+	  	未读消息：<span class="badge">10</span>
+	  </button>
+	  <!-- 进度条 -->
+	  <br>
+	  <br>
+	  <div class="progress">
+	  	<div class="progress-bar progress-bar-striped progress-bar-success active" style="width:60%">
+	  		60%
+	  	</div>
+	  </div>
+	  <!-- 面板 -->
+	  <div class="panel panel-danger">
+	  	<div class="panel-heading">
+	  		标题
+	  	</div>
+	  	<!-- <div class="panel-body">
+	  		内容区
+	  	</div> -->
+	  	<table class="table table-condensed text-center">
+	  		<tr>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  		</tr>
+	  		<tr>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  		</tr>
+	  		<tr>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  		</tr>
+	  		<tr>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  		</tr>
+	  		<tr>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  			<td>hello</td>
+	  		</tr>
+	  	</table>
+	  	<!-- <div class="panel-footer">
+	  		尾部
+	  	</div> -->
+	  </div>
+	  <!-- 面包屑 路径导航 -->
+	  <ol class="breadcrumb">
+	  	<li><a href="">首页</a></li>
+	  	<li><a href="">新闻页</a></li>
+	  	<li><a href="">栏目页</a></li>
+	  </ol>
+	  <!-- 导航条 -->
+	  <nav class="navbar navbar-default navbar-fixed-bottom">
+	  	<div class="container">
+	  		<!-- 导航 -->
+	  		<ul class="nav nav-pills nav-justified">
+				  <li>新闻页</li>
+	  			<li>新闻页</li>
+	  			<li>新闻页</li>
+				</ul>
+	  	</div>
+	  </nav>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+</body>
+</html>
