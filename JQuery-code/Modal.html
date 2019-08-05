@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      /* tr,td{
+        text-align: center;
+    } */
+    </style>
+  </head>
+  <body>
+    <button>新增</button>
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>操作1</th>
+          <th>操作2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>xjm</td>
+          <td>18</td>
+          <td><button>删除</button></td>
+          <td><button>修改</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display: none">
+    name:<input type="text" value=""/>
+    age:<input type="text" value=""/>
+    </div>
+    <script>
+    var btns = document.getElementsByTagName('button');
+    var btnsArr = Array.prototype.slice.call(btns,0);
+    btnsArr.forEach(function(item){
+      console.log(item.innerText)
+    })
+    </script>
+  </body>
+</html>

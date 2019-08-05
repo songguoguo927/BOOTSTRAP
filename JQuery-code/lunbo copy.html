@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div.wrap {
+        width: 600px;
+        height: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+        position: relative;
+      }
+      div.btn-container {
+        text-align: center;
+        z-index: 100;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+      }
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 600px;
+        height: 300px;
+        font-size: 3em;
+        text-align: center;
+        line-height: 300px;
+        color: white;
+        font-family: sans-serif;
+      }
+      .item1 {
+        background: rebeccapurple;
+      }
+      .item2 {
+        background: salmon;
+      }
+      .item3 {
+        background: rgb(95, 206, 169);
+      }
+      .item4 {
+        background: rgb(197, 17, 53);
+      }
+      /* .currentShow {
+        opacity: 1;
+      } */
+      /* 默认就是显示，所以我们只对hidden进行添加或移除 */
+      .hidden {
+        opacity: 0;
+      }
+      .left,
+      .right {
+        position: absolute;
+        bottom: 44%;
+        z-index: 100;
+      }
+      .left {
+        left: 20px;
+      }
+      .left-arrow {
+        background-image: url("./arrow_left.png");
+        display: block;
+        height: 34px;
+        width: 18px;
+      }
+      .right-arrow {
+        background-image: url("./arrow_right.png");
+        display: block;
+        width: 18px;
+        height: 35px;
+      }
+      .right {
+        right: 20px;
+      }
+      .circle-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border: 1px solid white;
+        border-radius: 50%;
+        margin: auto 5px;
+      }
+      .circle-dot:hover {
+        background: cornflowerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="control-btn">
+        <div class="left">
+          <i class="left-arrow previous"></i>
+        </div>
+        <div class="right">
+          <i class="right-arrow next"></i>
+        </div>
+      </div>
+      <div class="item-container">
+        <!-- <span class="item1" data-id="1">1</span>
+        <span class="item2" data-id="2">2</span>
+        <span class="item3 current" data-id="3">3</span>
+        <span class="item4" data-id="4">4</span> -->
+      </div>
+      <div class="btn-container">
+        <!-- <button data-slide-to="1">1</button>
+        <button data-slide-to="2">2</button>
+        <button data-slide-to="3">3</button>
+        <button data-slide-to="4">4</button> -->
+      </div>
+    </div>
+    <script>
+      /*全局变量提到顶部*/
+      var imgWrap = document.getElementsByClassName("item-container")[0];
+      var btnContainer = document.getElementsByClassName("btn-container")[0];
+      var controlBtn = document.getElementsByClassName("control-btn")[0];
+      /*渲染数据到页面*/
+     function initBindHtml(){
+      var imgNums = [
+        '<span class="item1" data-id="1">1</span>',
+        '<span class="item2 hidden" data-id="2">2</span>',
+        '<span class="item3 hidden" data-id="3">3</span>',
+        '<span class="item4 hidden" data-id="4">4</span>'
+      ];
+
+      
+      var str = "";
+      imgNums.forEach(function(item, index) {
+        str += item;
+      });
+      imgWrap.innerHTML = str;
+      // console.log(str)
+      //生成对应个button
+      str = "";
+      for (var i = 0; i < imgNums.length; i++) {
+        str += `<button data-slide-to="${i + 1}">${i + 1}</button>`;
+      }
+      btnContainer.innerHTML = str;
+     }
+      /*-----end*/
+      initBindHtml();
+      /*悬停按钮几到对应位置*/
+      btnContainer.onmouseover = function(e) {
+        var target = e.target;
+        if (target.nodeName == "BUTTON") {
+          //   console.log(target.innerText) //string类型
+          var text = target.innerText;
+          move(text);
+        }
+      };
+      function move(text) {
+        /*需求： 给的text是几，就展示第几张
+        思路：
+        如果text对应的当前展示（当前没有hidden）的图片dataid值相同，则不需要切换，啥也不干return；
+        如果给的text 与当前展示的图片对应的dataid值不同，需要将当前展示的图片添加hidden，把text对应的图片去掉hidden       
+        */
+
+        //1，获取所有的item，并将其转成数组
+        var spans = document.getElementsByTagName("span");
+        spansArr = Array.prototype.slice.call(spans, 0);
+        //2，取出要展示的item
+        var showTarget = spansArr.filter(function(item) {
+          return item.getAttribute("data-id") == text;
+        });
+        // console.log(showTarget)
+        //3，获取当前class中没有hidden的元素的data-id
+        var reg = /\b(hidden)\b/gi;
+        var currentShow = spansArr.filter(function(item) {
+          // console.log(item.getAttribute('class').match(reg))
+          return item.getAttribute("class").match(reg) == null;
+        });
+        // console.log(currentShow)
+        // console.log(currentShow[0].getAttribute('data-id'))
+
+        //4,判断text值与当前展示的span中的data-id是否相同
+
+        if (currentShow[0].getAttribute("data-id") == text) {
+          //相同则啥也不做
+          return;
+        } else {
+          //不同，则需要把当前张隐藏并对应页显示
+          currentShow[0].className += " hidden";
+          showTarget[0].className = `item${text}`;
+        }
+      }
+      /*---end*/
+
+      /*点击上一张下一张*/
+     
+      controlBtn.onclick = function(e) {
+        if (e.target.nodeName == "BUTTON") {
+          var clsName = e.target.getAttribute("class");
+           //1，获取所有的item，并将其转成数组
+           var spans = document.getElementsByTagName("span");
+            spansArr = Array.prototype.slice.call(spans, 0);
+            //3，获取当前class中没有hidden的元素的data-id
+            var reg = /\b(hidden)\b/gi;
+            var currentShow = spansArr.filter(function(item) {
+              return item.getAttribute("class").match(reg) == null;
+            });
+            // console.log(currentShow)
+
+          //获取当前显示的是哪一张，找出他的相邻兄弟
+          if (clsName == "previous") {
+            var showTarget =currentShow[0].previousSibling;
+             if(showTarget){
+              // console.log(showTarget)
+              //把当前张隐藏，上一张显示（即给当前展示的加hidden class，上一张去掉hidden）
+              currentShow[0].className += " hidden";
+              // console.log(showTarget.className.split(' '))  - [ ] 准确去掉hidden
+              var clsArr = showTarget.className.split(' ').filter(function(item){
+                return item != "hidden";
+              })              
+              showTarget.className = clsArr.join('');
+            }
+            return;
+          }
+          if (clsName == "next") { 
+            var showTarget = currentShow[0].nextSibling;   
+            if(showTarget){
+              // console.log(showTarget)
+              //把当前张隐藏，上一张显示（即给当前展示的加hidden class，上一张去掉hidden）
+              currentShow[0].className += " hidden";
+              // console.log(showTarget.className.split(' '))  - [ ] 准确去掉hidden
+              var clsArr = showTarget.className.split(' ').filter(function(item){
+                return item != "hidden";
+              })              
+              showTarget.className = clsArr.join('');
+            }
+            return;
+          }
+        }
+      };
+      /*考虑重复代码太多，可进行提取封装
+      1，获取当前展示页，以及将要展示页（当前展示页是根据没有hidden class的；将要展示页：1，有对应的数字，2，只有上/下一张）
+      2，获取控件并进行事件绑定
+      3，拿到数据渲染页面
+      */
+    </script>
+  </body>
+</html>

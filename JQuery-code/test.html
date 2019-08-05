@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>选择器</title>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <style>
+      div {
+        width: 200px;
+      }
+    </style>
+    <script>
+      $(function() {
+        //文档加载完毕执行
+        // console.log($('div'));
+        $("div").click(function(event) {
+          //给所有选中的div绑定了click事件，批处理
+          // alert('1');
+          // console.log(event) //事件对象
+          console.log(this); //this指向点击对应的DOM节点
+        });
+        //样式操作，使用jQuery的css方法 给div背景
+        $("div").css("background", "red");
+        $("div").css({
+          backgroundColor: "red",
+          margin: "20px"
+        });
+        //获取css属性的值
+        console.log($("div").css("width")); //获取第一个的值；刚设置的获取为空，异步方法css？
+      });
+      //另一种文档加载完毕执行
+      //    $(document).ready(function(){
+      // 类似  $('div').click(括号中写事件处理程序)
+      //    })
+    </script>
+  </head>
+  <body>
+    <div>test</div>
+    <div>test2</div>
+  </body>
+</html>

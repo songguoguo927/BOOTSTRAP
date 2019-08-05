@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>test</title>
+    <script src="./jquery-3.4.1.min.js"></script>
+
+    <script>
+      $(function() {
+        // alert($("div,span,p.myClass"));//[object Object]
+        // console.log($("div,span,p.myClass")); //返回一个类数组对象Object { 0: div, 1: p.myClass, 2: span, length: 3, prevObject: Object(1) }
+        // console.log($("div:parent"))
+        // console.log($("ul li:first-child")[0])
+        // console.log($("li:first-child")[0])
+        // console.log($("li:first-child")==$("ul li:first-child"))
+        // console.log( $("p").parent(".selected")[0]) //div class="selected"><p>Hello Again</p></div>
+        // console.log( $("p").parents(".selected")[0]) //div class="selected"><p>Hello Again</p></div>
+        //找到每个span元素的所有祖先元素
+        // console.log( $("span").parents())
+        // console.log( $("span").parent())
+        // $('.btn').bind('click',{id:1},function(e){
+        //     console.log(e)
+        //     console.log(e.data)
+        // })
+        //---
+        //    console.log( $('input').val('wow'))
+        //    console.log( $('input').val())
+        //  $('input').val(function(index,oldVal){
+        //      console.log(oldVal)
+        //     console.log(index,'---',111)
+        // })
+        // $('input').val(["wow1","wow2"])
+
+        //---工具方法
+        console.log($('input').get());
+        console.log($('input').get(-1));
+        console.log($('input').eq(-1));
+        console.log($('input').get()[1]);
+        //<===>
+        console.log($('input').get(1));
+        console.log($('input').toArray());
+
+      });
+    </script>
+  </head>
+  <body>
+    <input type="text" value="lall1" />
+    <input type="text" value="lall2" />
+    <!-- <input type="text" value="lall3"> -->
+    <div><p>Hello</p></div>
+    <div class="selected"><p>Hello Again</p></div>
+    <div>div</div>
+    <div>
+      <!-- lall -->
+    </div>
+    <div class="btn">click me</div>
+    <ul>
+      <li>1111<a>wow</a></li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <div><span></span></div>
+    <p class="myClass">p class="myClass"</p>
+    <span>span</span>
+    <p class="notMyClass">p class="notMyClass"</p>
+  </body>
+</html>

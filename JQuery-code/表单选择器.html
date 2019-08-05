@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function() {
+        $('form :checkbox').click(function() {
+          var $result = $('form :checkbox:checked');
+          console.log($result);
+          //3、使用jQuery对象提供的map方法，将value映射出来 返回的也是jQuery对象
+          var $arr= $result.map(function(index,item){
+              console.log(index,item);
+            //   return item.value;
+            return $(item).val()
+          })
+          console.log($arr)
+          //jQuery对象转成数组
+          var arr=Array.prototype.slice.call($arr,0);
+          console.log(arr,'----')
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form action="" autocomplete="off">
+      <input type="text" />
+      <input type="checkbox" value="1" />
+      <input type="checkbox" value="2" />
+    </form>
+  </body>
+</html>

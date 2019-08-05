@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div.wrap {
+        width: 600px;
+        height: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+        position: relative;
+      }
+      div.btn-container {
+        text-align: center;
+        z-index: 100;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+      }
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 600px;
+        height: 300px;
+        font-size: 3em;
+        text-align: center;
+        line-height: 300px;
+        color: white;
+        font-family: sans-serif;
+      }
+      .item1 {
+        background: rebeccapurple;
+      }
+      .item2 {
+        background: salmon;
+      }
+      .item3 {
+        background: rgb(95, 206, 169);
+      }
+      .item4 {
+        background: rgb(197, 17, 53);
+      }
+      /* .currentShow {
+        opacity: 1;
+      } */
+      /* 默认就是显示，所以我们只对hidden进行添加或移除 */
+      .hidden {
+        opacity: 0;
+      }
+      .left,
+      .right {
+        position: absolute;
+        bottom: 44%;
+        z-index: 100;
+      }
+      .left {
+        left: 20px;
+      }
+      .left-arrow {
+        background-image: url("./arrow_left.png");
+        display: block;
+        height: 34px;
+        width: 18px;
+      }
+      .right-arrow {
+        background-image: url("./arrow_right.png");
+        display: block;
+        width: 18px;
+        height: 35px;
+      }
+      .right {
+        right: 20px;
+      }
+      .circle-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border: 1px solid white;
+        border-radius: 50%;
+        margin: auto 5px;
+      }
+      .circle-dot:hover {
+        background: cornflowerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="control-btn">
+        <div class="left">
+          <i class="left-arrow previous"></i>
+        </div>
+        <div class="right">
+          <i class="right-arrow next"></i>
+        </div>
+      </div>
+      <div class="item-container">
+        <!-- <span class="item1" data-id="1">1</span>
+        <span class="item2" data-id="2">2</span>
+        <span class="item3 current" data-id="3">3</span>
+        <span class="item4" data-id="4">4</span> -->
+      </div>
+      <div class="btn-container">
+        <!-- <button data-slide-to="1">1</button>
+        <button data-slide-to="2">2</button>
+        <button data-slide-to="3">3</button>
+        <button data-slide-to="4">4</button> -->
+      </div>
+    </div>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function() {
+        /*渲染数据到页面*/
+        function initBindHtml() {
+          var imgNums = [
+            '<span class="item1" data-id="1">1</span>',
+            '<span class="item2 hidden" data-id="2">2</span>',
+            '<span class="item3 hidden" data-id="3">3</span>',
+            '<span class="item4 hidden" data-id="4">4</span>'
+          ];
+          var str = "";
+          imgNums.forEach(function(item, index) {
+            str += item;
+          });
+          // console.log(str);
+          $(".item-container").append(str);
+          str = "";
+          for (var i = 0; i < imgNums.length; i++) {
+            str += `<i class="circle-dot" data-slide-to="${i + 1}"></i>`;
+          }
+          $(".btn-container").append(str);
+        }
+        /*-----end*/
+        initBindHtml();
+
+        //功能：获取当前展示页
+        function getCur() {
+          return $(".item-container span").filter(function(index) {
+            // console.log(index,'--',this.className)
+            if (!$(this).hasClass("hidden")) {
+              return this;
+            }
+          });
+        }
+        $(".btn-container")
+          .children()
+          .mouseover(function(e) {
+            //1，获取当前展示的页，class没有hidden的元素
+            var $cur = getCur();
+            // console.log($cur.attr("data-id"));
+            // console.log($(e.target).attr('data-slide-to'))2， 将要显示的页号
+            var $willShowId = $(e.target).attr("data-slide-to");
+            //3，将要显示的页
+            var $willShow = $(".item-container span").filter(function(index) {
+              if ($(this).attr("data-id") == $willShowId) {
+                return this;
+              }
+            });
+            // console.log($willShow);
+            if ($cur.attr("data-id") == $willShowId) {
+              return;
+            }
+            $cur.addClass("hidden"); //只加了一次，出现问题解决，把获取当前展示页放进mouseover函数中，
+            $willShow.removeClass("hidden");
+          });
+
+        $(".control-btn")
+          .children()
+          .click(function(e) {
+            var $cur = getCur();
+            // console.log($cur.next());
+            // console.log($cur.prev());
+            // console.log(e.target)
+            if ($(e.target).hasClass("next")) {
+              //点击的是下一张
+              if ($cur.next().length == 0) {
+                //当前为末尾
+                return;
+              }
+              $cur.addClass("hidden");
+              $cur.next().removeClass("hidden");
+            }
+            if ($(e.target).hasClass("previous")) {
+              //点击的是上一张
+              if ($cur.prev().length == 0) {
+                //当前为开头
+                return;
+              }
+              $cur.addClass("hidden");
+              $cur.prev().removeClass("hidden");
+            }
+          });
+        function autoPlay() {
+          return setInterval(function() {
+            var $cur = getCur();
+            $cur.addClass("hidden");
+            $cur.next().removeClass("hidden");
+            if ($cur.next().length == 0) {
+              //当前为末尾  就让下一个展示第一个
+              var theOne = $cur[0].parentNode.firstElementChild;
+              $(theOne).removeClass("hidden");
+            }
+          }, 1000);
+        }
+        var id = autoPlay();
+        $('.wrap').bind({
+          'mouseenter':function(){
+          clearInterval(id)
+        },
+        'mouseleave':function(){
+          id=autoPlay()
+        }})
+      });
+    </script>
+  </body>
+</html>
