@@ -113,7 +113,7 @@ row
 
 ## 响应式列重置
 即便有上面给出的四组栅格class，也不免会碰到一些问题，例如，在某些阈值时，某些列可能会出现比别的列高的情况。为了克服这一问题，建议联合使用 .clearfix 和 响应式工具类。
-![]()
+![]('./assets/clearfix.png')
 .clearfix--->mixin/clearfix.scss
 ```scss
 @mixin clearfix() {
@@ -129,12 +129,12 @@ row
   }*/
 ```
 mixin/ 主要定义一些可重用的代码块 
-
+![]('./assets/列排序.png')
 ### 列偏移
 除了列在分界点清除响应， 您可能需要 重置偏移, 后推或前拉某个列
-
+![]('./assets/列偏移.png')
 ### 列嵌套
-
+![]('./assets/列嵌套.png')
 mixins/_caret.scss是三角图标的样式
 
 
